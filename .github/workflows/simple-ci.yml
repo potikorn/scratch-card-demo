@@ -23,14 +23,9 @@ jobs:
       - run: flutter pub get
       - run: flutter build apk
       - run: flutter build appbundle
-
-  upload-android-artifact:
-    name: Upload Android APK
-    needs: android-build 
-    if: github.ref == 'refs/heads/main'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/upload-artifact@v1
+      - name: Upload Android APK
+        if: github.ref == 'refs/heads/main'
+        uses: actions/upload-artifact@v1
         with:
           name: release-apk
           path: build/app/outputs/flutter-apk/app-release.apk 
