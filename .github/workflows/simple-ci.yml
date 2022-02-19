@@ -20,8 +20,8 @@ jobs:
       - run: flutter build appbundle
 
   upload-android-artifact:
-    needs: android-build
     name: Upload Android APK
+    needs: android-build 
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
