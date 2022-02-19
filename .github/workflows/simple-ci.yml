@@ -8,6 +8,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
       - uses: actions/setup-java@v2
         with:
           distribution: "zulu"
@@ -15,6 +17,9 @@ jobs:
       - uses: subosito/flutter-action@v2
         with:
           channel: "stable"
+          cache: true
+          cache-key: flutter # optional, change this to force refresh cache
+          cache-path: ${{ runner.tool_cache }}/flutter # optional, change this to specify the cache path
       - run: flutter pub get
       - run: flutter build apk
       - run: flutter build appbundle
@@ -35,8 +40,13 @@ jobs:
     runs-on: macos-latest
     steps:
       - uses: actions/checkout@v2
+        with:
+            fetch-depth: 0
       - uses: subosito/flutter-action@v2
         with:
           channel: "stable"
+          cache: true
+          cache-key: flutter # optional, change this to force refresh cache
+          cache-path: ${{ runner.tool_cache }}/flutter # optional, change this to specify the cache path
       - run: flutter pub get
       - run: flutter build ios --release --no-codesign
