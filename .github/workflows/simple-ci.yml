@@ -20,12 +20,15 @@ jobs:
       - run: flutter build appbundle
 
   upload-android-artifact:
-    name: Upload-Android-APK
+    needs: android-build
+    name: Upload Android APK
     if: github.ref == 'refs/heads/main'
-    uses: ncipollo/release-action@v2
-    with:
-      artifacts: "build/app/outputs/flutter-apk/*.apk"
-      token: ${{ secrets.GITHUB_TOKEN }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: ncipollo/release-action@v2
+      - with:
+          artifacts: "build/app/outputs/flutter-apk/*.apk"
+          token: ${{ secrets.GITHUB_TOKEN }}
 
   ios-build:
     name: iOS Build
