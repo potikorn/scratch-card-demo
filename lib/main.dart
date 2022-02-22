@@ -128,6 +128,7 @@ class _ScratchCardState extends State<ScratchCard> {
         ),
         const SizedBox(height: 24),
         Container(
+          key: const Key('scratch_key'),
           clipBehavior: Clip.hardEdge,
           decoration: const BoxDecoration(
               color: Colors.blue,
